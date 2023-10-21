@@ -24,6 +24,8 @@ builder.Services.AddDbContext<EventsServiceContext>(options =>
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IEventEntryRepository, EventEntryRepository>();
+builder.Services.AddScoped<IFavouriteEventRepository, FavouriteEventRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddSingleton<TokenDecoder>();
 

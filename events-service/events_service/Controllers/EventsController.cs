@@ -14,15 +14,12 @@ namespace events_service.Controllers;
 public class EventsController : ControllerBase
 {
     private readonly IEventRepository _eventsRepository;
-    private readonly IEventEntryRepository _eventEntryRepository;
     private readonly TokenDecoder _tokenDecoder;
 
-    public EventsController(IEventRepository eventsRepository, 
-                            IEventEntryRepository eventEntryRepository,
+    public EventsController(IEventRepository eventsRepository,
                             TokenDecoder tokenDecoder)
     {
         _eventsRepository = eventsRepository;
-        _eventEntryRepository = eventEntryRepository;
         _tokenDecoder = tokenDecoder;
     }
 
@@ -163,7 +160,7 @@ public class EventsController : ControllerBase
             Name = eventDto.Name,
             Description = eventDto.Description,
             IsDeleted = false,
-            CreatedAt = DateTime.Now,
+            CreatedAt = DateTime.UtcNow,
             StartAt = eventDto.StartAt,
             Price = eventDto.Price,
             CategoryId = eventDto.Category.Id,
