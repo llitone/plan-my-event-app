@@ -12,9 +12,14 @@ function setRedisClient(redis) {
 const root = {
     async createAccount({ name, phone_number, email, birthday, password, role }, context) {
         try {
-            const newAccount = [
-                name, phone_number, email, birthday, hash.generate(password), role
-            ];
+            const newAccount = {
+                name: name, 
+                phone_number: phone_number,
+                email: email,
+                birthday: birthday,
+                password: hash.generate(password), 
+                role: role
+            }
             let result = await model.signing(newAccount);
             console.log(result, 11221212);
             if (result != null && result.id != null) {
@@ -44,7 +49,7 @@ const root = {
     },
     async checkLogin({ email, password }, context) {
         try {
-            let account = [email];
+            let account = {email: email};
             // model.logging((err, arr) => {
             //     if (err) {
             //         console.log(err);
