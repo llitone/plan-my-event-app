@@ -17,10 +17,16 @@ public class EventEntryRepository : IEventEntryRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteEventEntryAsync(EventEntry eventEntry)
+    public async Task DeleteEventEntryAsync(int userId, int eventId)
     {
-        _context.Remove(eventEntry);
-        await _context.SaveChangesAsync();
+        EventEntry? eventEntry = await _context.EventEntries
+            .FirstOrDefaultAsync(e => e.UserId == userId && e.EventId == eventId);
+
+        if (eventEntry != null)
+        {
+            _context.EventEntries.Remove(eventEntry);
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task<IEnumerable<EventEntry>> GetEntriesByEventId(int eventId)
@@ -28,5 +34,11 @@ public class EventEntryRepository : IEventEntryRepository
         return await _context.EventEntries
             .Where(ee => ee.UserId == eventId)
             .ToListAsync();
+    }
+
+    public async Task<bool> IsEntryAsync(int userId)
+    {
+        return (await _context.EventEntries
+            .FirstOrDefaultAsync(ee => ee.UserId == userId)) != null;
     }
 }
