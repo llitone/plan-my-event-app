@@ -38,7 +38,7 @@ namespace events_service_data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories");
+                    b.ToTable("categories", (string)null);
                 });
 
             modelBuilder.Entity("EventsServiceData.Entities.Event", b =>
@@ -91,7 +91,7 @@ namespace events_service_data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("events");
+                    b.ToTable("events", (string)null);
                 });
 
             modelBuilder.Entity("EventsServiceData.Entities.EventEntry", b =>
@@ -119,7 +119,7 @@ namespace events_service_data.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("event_entries");
+                    b.ToTable("event_entries", (string)null);
                 });
 
             modelBuilder.Entity("EventsServiceData.Entities.FavouriteEvent", b =>
@@ -143,7 +143,7 @@ namespace events_service_data.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("favourites_events");
+                    b.ToTable("favourites_events", (string)null);
                 });
 
             modelBuilder.Entity("EventsServiceData.Entities.Event", b =>

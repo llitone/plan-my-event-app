@@ -11,10 +11,11 @@ public class EventRepository : IEventRepository
     {
         _context = context;
     }
-    public async Task AddEventAsync(Event e)
+    public async Task<int> AddEventAsync(Event e)
     {
-        await _context.Events.AddAsync(e);
+        var addedEvent = await _context.Events.AddAsync(e);
         await _context.SaveChangesAsync();
+        return addedEvent.Entity.Id;
     }
 
     public async Task DeleteEventAsync(int id)
@@ -34,19 +35,22 @@ public class EventRepository : IEventRepository
     {
         return await _context.Events
             .Where(e => e.IsDeleted == false)
+            .Include(e => e.Category)
             .ToListAsync();
     }
 
     public async Task<Event?> GetEventByIdAsync(int id)
     {
         return await _context.Events
+            .Include(e => e.Category)
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task<IEnumerable<Event>> GetEventsByCategoryAsync(Category category)
     {
         return await _context.Events
-            .Where(e => e.CategoryId == category.Id)
+            .Where(e => e.Category.Id == category.Id)
+            .Include(e => e.Category)
             .ToListAsync();
     }
 
@@ -54,6 +58,7 @@ public class EventRepository : IEventRepository
     {
         return await _context.Events
             .Where(e => e.StartAt > date)
+            .Include(e => e.Category)
             .ToListAsync();
     }
 
@@ -61,6 +66,7 @@ public class EventRepository : IEventRepository
     {
         return await _context.Events
             .Where(e => e.StartAt <= date)
+            .Include(e => e.Category)
             .ToListAsync();
     }
 
@@ -69,6 +75,7 @@ public class EventRepository : IEventRepository
         return await _context.FavoriteEvents
             .Where(fe => fe.UserId == userId)
             .Select(fe => fe.Event)
+            .Include(e => e.Category)
             .ToListAsync();
     }
 

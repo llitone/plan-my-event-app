@@ -4,7 +4,7 @@ namespace events_service_data.Repositories;
 
 public interface IEventRepository
 {
-    Task AddEventAsync(Event e);
+    Task<int> AddEventAsync(Event e);
     Task DeleteEventAsync(int id);
     Task<IEnumerable<Event>> GetEventsByCategoryAsync(Category category);
     Task<IEnumerable<Event>> GetAllEventsAsync();

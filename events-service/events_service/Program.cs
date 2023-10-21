@@ -1,3 +1,5 @@
+using events_service.Services;
+using events_service_data.Repositories;
 using EventsServiceData;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -20,6 +22,11 @@ builder.Services.AddDbContext<EventsServiceContext>(options =>
     options.UseNpgsql(connection.ConnectionString);
 });
 
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IEventEntryRepository, EventEntryRepository>();
+
+builder.Services.AddSingleton<TokenDecoder>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,5 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.Run();
