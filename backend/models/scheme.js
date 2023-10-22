@@ -19,15 +19,15 @@ const typeDefs = buildSchema(`
 
         type Post {
             id: ID
-            type: String
-            header: String
+            creator_id: ID
+            name: String
             description: String
-            owner_id: ID
-            blog_id: ID
-            configuration: JSON
-            photo_path: String
-            hash: String
-            user: JSON
+            created_at: String
+            start_at: String
+            address: String
+            price: String
+            category: JSON
+            user: Account
         }
 
         type Query {
