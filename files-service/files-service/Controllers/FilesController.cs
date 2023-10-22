@@ -26,10 +26,4 @@ public class FilesController : ControllerBase
             return BadRequest();
         }
     }
-
-    [HttpGet, Route("download/{eventId}")]
-    public async Task<IActionResult> Upload(int eventId)
-    {
-        
-    }
 }
