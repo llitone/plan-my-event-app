@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форма мероприятия</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <a class="navbar-brand" href="index.html" style="color: black;">Plan My Event</a>
+    <h1>Форма мероприятия</h1>
+    <form>
+      <div class="form-group">
+        <label for="eventName">Название мероприятия</label>
+        <input type="text" class="form-control" id="eventName" placeholder="Введите название">
+      </div>
+      <div class="form-group">
+        <label for="eventPrice">Цена мероприятия</label>
+        <input type="text" class="form-control" id="eventPrice" placeholder="Введите цену">
+      </div>
+      <div class="form-group">
+        <label for="eventDate">Дата мероприятия</label>
+        <input type="date" class="form-control" id="eventDate">
+      </div>
+      <div class="form-group">
+        <label for="eventCategory">Категория мероприятия</label>
+        <select class="form-control" id="eventCategory">
+          <option>Категория 1</option>
+          <option>Категория 2</option>
+          <option>Категория 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="eventAddress">Адрес проведения мероприятия</label>
+        <textarea class="form-control" id="eventAddress" rows="3" placeholder="Введите адрес"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="eventImage">Картинка мероприятия (615x200 px)</label>
+        <input type="file" class="form-control-file" id="eventImage">
+      </div>
+      <a href="uspeshno.html" type="submit" class="btn btn-primary">Отправить</a>
+    </form>
+  </div>
+</body>
+</html>
