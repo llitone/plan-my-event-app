@@ -33,6 +33,8 @@ def __mail_confirmation():
 
     session.close()
 
+    url_generator.send_key(request.json["email"], new_url, "")
+
     return make_response(jsonify({"key": new_url}))
 
 
