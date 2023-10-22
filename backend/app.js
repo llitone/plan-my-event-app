@@ -10,6 +10,9 @@ require('dotenv').config();
 const { authRoutes } = require('@user-auth');
 const { authService } = require('@user-auth');
 const { userAuthModel } = require('@user-auth');
+const { eventsRoutes } = require('@user-auth');
+const { eventsService } = require('@user-auth');
+const { eventsModel } = require('@user-auth');
 
 const password = process.env.password;
 
@@ -36,6 +39,7 @@ db.sequelize.sync().then(() => {
 const app = express();
 const client = redis.createClient('6379', '127.0.0.1');
 userAuthModel.setDB(db);
+eventsModel.setDB(db);
 authService.setRedisClient(client);
 
 app.use(express.json());
@@ -47,6 +51,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
 app.use('/auth', authRoutes);
+app.use('/events', eventsRoutes);
 
 client.on("connect", function () {
     console.log("Redis работает");

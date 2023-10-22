@@ -49,19 +49,7 @@ const root = {
     },
     async checkLogin({ email, password }, context) {
         try {
-            let account = {email: email};
-            // model.logging((err, arr) => {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         result = arr;
-            //     };
-            // }, account, password)
-
-            // let promise = new Promise((resolve, reject) => {
-            //     resolve();
-            // })
-
+            let account = { email: email };
             let result = await model.logging(account, password);
             console.log(result);
             if (result != null && result.id != null) {
